@@ -1,5 +1,8 @@
 [phases.setup]
-nixPkgs = ["nodejs@18"]
+nixPkgs = ["nodejs"]
+
+[phases.setup.env]
+NIXPACKS_NODE_VERSION = "18"
 
 [phases.install]
 cmds = ["npm install --no-audit --legacy-peer-deps"]
