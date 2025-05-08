@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Fadu Card Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A mobile-friendly card game built with React and Capacitor. This application allows players to enjoy the Fadu card game on both web and mobile platforms.
 
-## Available Scripts
+## Game Overview
 
-In the project directory, you can run:
+Fadu is a strategic card game where players aim to have the lowest sum of cards in their hand. The game features:
 
-### `npm start`
+- Support for 2-8 players
+- Customizable number of rounds
+- Player name customization
+- Mobile-specific features (haptic feedback, status bar customization)
+- Game state saving when app is backgrounded
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React.js for UI components and state management
+- Capacitor for native mobile capabilities
+- HTML/CSS for styling and layout
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js (v14 or newer)
+- npm (v6 or newer)
+- For mobile development:
+  - Android Studio (for Android builds)
+  - Xcode (for iOS builds)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/fadu-card-game.git
+   cd fadu-card-game
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. Start the development server
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Building for Production
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Web
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run build
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Android
 
-## Learn More
+```bash
+npm run cap:build
+npm run cap:open
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Game Rules
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Players take turns drawing and playing cards
+- The goal is to have the lowest total value of cards in your hand
+- Players can "call" when they believe they have the lowest hand
+- A successful call earns bonus points
+- After the specified number of rounds, the player with the highest score wins
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the LICENSE file for details.
