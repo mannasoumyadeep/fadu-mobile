@@ -118,11 +118,9 @@ function App() {
     setupStatusBar();
   }, []);
   
-  // Load saved game
+  // Load saved game - enhanced for web support
   useEffect(() => {
     const loadSavedGame = async () => {
-      if (!Capacitor.isNativePlatform()) return;
-      
       try {
         const { value } = await Storage.get({ key: 'faduGameState' });
         if (value) {
@@ -200,9 +198,9 @@ function App() {
     }
   };
   
-  // Save game state to device storage
+  // Save game state - enhanced for web support
   const saveGameState = async () => {
-    if (!gameStarted || !Capacitor.isNativePlatform()) return;
+    if (!gameStarted) return;
     
     const gameState = {
       gameStarted,
@@ -225,8 +223,16 @@ function App() {
         key: 'faduGameState',
         value: JSON.stringify(gameState)
       });
+      
+      if (!Capacitor.isNativePlatform()) {
+        console.log('Game state saved to browser storage');
+      }
     } catch (error) {
       console.error('Error saving game state:', error);
+      if (!Capacitor.isNativePlatform()) {
+        // Show a more discreet message for web
+        console.warn('Game progress may not be saved in private/incognito mode');
+      }
     }
   };
   
@@ -236,10 +242,8 @@ function App() {
     return playerHand.some(card => getCardValue(card) === getCardValue(tableCard));
   };
 
-  // Trigger haptic feedback
+  // Trigger haptic feedback - enhanced for web visual feedback
   const triggerHapticFeedback = async (type = 'medium') => {
-    if (!Capacitor.isNativePlatform()) return;
-    
     try {
       if (type === 'light') {
         await Haptics.impact({ style: 'light' });
@@ -678,7 +682,7 @@ function App() {
     saveGameState();
   };
 
-  // End the game and determine the winner
+  // End the game and determine the winner - enhanced for web
   const endGame = () => {
     // Find the maximum score
     const maxScore = Math.max(...players.map(p => p.score));
@@ -689,13 +693,12 @@ function App() {
     setGameWinners(winners);
     setShowWinner(true);
     
-    // Clear saved game state
-    if (Capacitor.isNativePlatform()) {
-      Storage.remove({ key: 'faduGameState' });
-    }
+    // Clear saved game state in all environments
+    Storage.remove({ key: 'faduGameState' })
+      .catch(error => console.error('Error clearing saved game:', error));
   };
 
-  // Reset the game to start a new one
+  // Reset the game to start a new one - enhanced for web
   const resetGame = () => {
     setGameStarted(false);
     setShowWinner(false);
@@ -709,10 +712,9 @@ function App() {
     setRoundEnded(false);
     setIsFirstPlayerOfRound(true);
     
-    // Clear saved game state
-    if (Capacitor.isNativePlatform()) {
-      Storage.remove({ key: 'faduGameState' });
-    }
+    // Clear saved game state in all environments
+    Storage.remove({ key: 'faduGameState' })
+      .catch(error => console.error('Error clearing saved game:', error));
   };
 
   // Start the next round
@@ -733,13 +735,13 @@ function App() {
     setIsGameRestored(false);
   };
 
-  // Start new game instead of resuming
+  // Start new game instead of resuming - enhanced for web
   const handleNewGameInstead = () => {
     triggerHapticFeedback('medium');
     
-    if (Capacitor.isNativePlatform()) {
-      Storage.remove({ key: 'faduGameState' });
-    }
+    // Clear storage in all environments
+    Storage.remove({ key: 'faduGameState' })
+      .catch(error => console.error('Error clearing saved game:', error));
     
     resetGame();
     setIsGameRestored(false);
@@ -886,6 +888,12 @@ function App() {
         </div>
         
         <h1 className="title">Current Player: {players[currentTurnIndex]?.name}</h1>
+        
+        {!Capacitor.isNativePlatform() && (
+          <div className="web-note">
+            Note: You're playing in a web browser. Card selection is done with a single tap/click. Pass the device physically to the next player when prompted.
+          </div>
+        )}
         
         <div className="players-list">
           {players.map(player => (

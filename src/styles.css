@@ -5,6 +5,19 @@
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+/* Web-specific styles for improved UI on browsers */
+@media (hover: hover) {
+  .playing-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .game-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
 }
 
 body {
@@ -339,8 +352,59 @@ body {
   font-size: 18px;
 }
 
+/* Web compatibility - visual feedback styles */
+.web-feedback-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.web-feedback-light {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.web-feedback-medium {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.web-feedback-heavy {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.web-feedback-success {
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+.web-feedback-warning {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+.web-feedback-error {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+/* Web-specific note for mobile web users */
+.web-note {
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  display: none; /* Hidden by default, shown in web environment */
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
+  /* Add a note about touch behavior for mobile web users */
+  .web-note {
+    display: block;
+  }
   .game-container {
     padding: 10px;
   }
