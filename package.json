@@ -2,6 +2,9 @@
   "name": "fadu-mobile",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@capacitor/android": "3.9.0",
     "@capacitor/app": "1.1.1",
@@ -23,6 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "serve": "serve -s build",
     "cap:init": "npx cap init",
     "cap:add": "npx cap add android",
     "cap:sync": "npx cap sync",

@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Capacitor } from '@capacitor/core';
-import { Haptics } from '@capacitor/haptics';
-import { App as CapApp } from '@capacitor/app';
-import { Storage } from '@capacitor/storage';
-import { StatusBar } from '@capacitor/status-bar';
 import './styles.css';
+
+// Conditional import of Capacitor modules
+// This allows the app to run in web environments without native functionality
+let Capacitor, Haptics, CapApp, Storage, StatusBar;
+
+try {
+  // Try to import the real Capacitor modules
+  Capacitor = require('@capacitor/core').Capacitor;
+  Haptics = require('@capacitor/haptics').Haptics;
+  CapApp = require('@capacitor/app').App;
+  Storage = require('@capacitor/storage').Storage;
+  StatusBar = require('@capacitor/status-bar').StatusBar;
+} catch (error) {
+  // If import fails, use web compatibility implementations
+  const webCompat = require('./capacitor-web-compat');
+  Capacitor = webCompat.Capacitor;
+  Haptics = webCompat.Haptics;
+  CapApp = webCompat.CapApp;
+  Storage = webCompat.Storage;
+  StatusBar = webCompat.StatusBar;
+  console.log('Running in web-only mode with limited functionality');
+}
 
 // Card deck utilities
 const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
